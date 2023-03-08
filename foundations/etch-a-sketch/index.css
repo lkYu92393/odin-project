@@ -1,0 +1,38 @@
+* {
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: lightgray;
+}
+
+body > div {
+    width : max(50vh, 800px);
+    margin: auto;
+}
+
+header {
+    width: 100%;
+    text-align: center;
+    padding: 2rem 0;
+    font-size: 2rem;
+}
+
+.num-box {
+    width: 50px;
+}
+
+section {
+    text-align: center;
+}
+
+div#script-target {
+    margin: auto;
+    width: fit-content;
+    display: grid;
+}
+
+div.bg-black { background-color: black; }
+div.bg-white { background-color: white; }
