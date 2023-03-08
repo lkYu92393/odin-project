@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock Paper Scissor</title>
+</head>
+<body>
+    <select>
+        <option value="0" selected>Rock</option>
+        <option value="1">Paper</option>
+        <option value="2">Scirssor</option>
+    </select>
+    <button onclick="playGame()">Play</button>
+    <div id="result"></div>
+</body>
+<script>
+    const stance = ["rock", "paper", "scissor"];
+    const toCapitalize = (text) => {
+        if (!text) {
+            return text[0].toUpperCase() + text.substring(1);
+        }
+    }
+    const displayResult = (result) => {
+        document.getElementById("result").innerText = result;
+    }
+    const getComputerChoice = () => {
+        let num = Math.floor(Math.random()*3);
+        return num;
+    }
+    const playGame = () => {
+        let result = "";
+        let playerChoice = parseInt(document.getElementsByTagName("select")[0].value);
+        let computerChoice = getComputerChoice();
+        console.log(playerChoice, computerChoice);
+        if (playerChoice == computerChoice) {
+            result = "Draw.";
+        } else if (playerChoice - computerChoice == 1 || playerChoice == 0 && computerChoice == 2) {
+            result = "You Win. " + toCapitalize(stance[playerChoice]) + " beats " + toCapitalize(stance[computerChoice]);
+        } else if (computerChoice - playerChoice == 1 || playerChoice == 2 && computerChoice == 0) {
+            result = "You Lose. " + toCapitalize(stance[computerChoice]) + " beats " + toCapitalize(stance[playerChoice]);
+        }
+        displayResult(result);
+    }
+</script>
+</html>
