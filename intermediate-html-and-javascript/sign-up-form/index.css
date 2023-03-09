@@ -18,7 +18,7 @@ body > div {
 
 div.left {
     max-width: 600px;
-    width: max(300px, 50vh);
+    width: max(300px, 40vw);
 }
 
 div.left img {

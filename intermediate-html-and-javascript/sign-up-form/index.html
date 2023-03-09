@@ -63,8 +63,32 @@
     </div>
 </body>
 <script>
-    document.addEventListener("DOMContentLoaded", (event) => {
+    const performCheckingOnInput = (event) => {
+        let id = event.target.parentElement.id;
+        switch (id) {
+            case "first-name":
+            case "last-name":
+                break;
+            case "email":
+                break;
+            case "phone-number":
+                // const regex = new RegExp("/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im");
+                break;
+            case "password":
+            case "confirm-password":
+                let password = document.querySelector("div#password input").value;
+                let cpassword = document.querySelector("div#confirm-password input").value;
+                if (password !== cpassword) {
+                    console.log("Password is not the same");
+                }
+                break;
+        }
+    }
 
+    document.addEventListener("DOMContentLoaded", (event) => {
+        document.querySelectorAll("div.input input").forEach(elem => {
+            elem.oninput = performCheckingOnInput;
+        })
     });
 </script>
 </html>
