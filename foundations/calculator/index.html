@@ -4,39 +4,99 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./index.css">
     <title>Calculator</title>
 </head>
 <body>
-    <select>
-        <option value="0" selected>Rock</option>
-        <option value="1">Paper</option>
-        <option value="2">Scirssor</option>
-    </select>
-    <button onclick="playGame()">Play</button>
-    <div id="result"></div>
+    <div>
+        <div>
+            <input disabled id="display" />
+        </div>
+        <div id="interface"></div>
+        <div id="operation">
+            <button onclick="evaluateDisplay()">Calculate</button>
+            <button onclick="clearDisplay()">Clear</button>
+        </div>
+    </div>
 </body>
 <script>
-    const stance = ["rock", "paper", "scissor"];
-    const displayResult = (result) => {
-        document.getElementById("result").innerText = result;
-    }
-    const getComputerChoice = () => {
-        let num = Math.floor(Math.random()*3);
-        return num;
-    }
-    const playGame = () => {
-        let result = "";
-        let playerChoice = parseInt(document.getElementsByTagName("select")[0].value);
-        let computerChoice = getComputerChoice();
-        console.log(playerChoice, computerChoice);
-        if (playerChoice == computerChoice) {
-            result = "Draw.";
-        } else if (playerChoice - computerChoice == 1 || playerChoice == 0 && computerChoice == 2) {
-            result = "You Win. " + stance[playerChoice] + " beats " + stance[computerChoice];
-        } else if (computerChoice - playerChoice == 1 || playerChoice == 2 && computerChoice == 0) {
-            result = "You Lose. " + stance[computerChoice] + " beats " + stance[playerChoice];
+    const displayElem = document.getElementById("display");
+
+    const add = (a, b) => parseFloat(a) + parseFloat(b);
+    const subtract = (a, b) => parseFloat(a) - parseFloat(b);
+    const multiply = (a, b) => parseFloat(a) * parseFloat(b);
+    const divide = (a, b) => parseFloat(a) / parseFloat(b);
+
+    const operation = (a, b, operator) => {
+        switch (operator) {
+            case "+":
+                return add(a,b);
+            case "-":
+                return subtract(a,b);
+            case "*":
+                return multiply(a,b);
+            case "/":
+                return divide(a,b);
         }
-        displayResult(result);
     }
+
+    const display = (elem) => {
+        if (['+','-','*','/'].includes(elem.innerText)) {
+            displayElem.value += " " + elem.innerText + " ";
+        } else {
+            displayElem.value += elem.innerText;
+        }
+    }
+    const clearDisplay = () => {
+        displayElem.value = "";
+    }
+    const evaluateDisplay = () => {
+        const expression = displayElem.value.split(' ');
+        while (expression.length >= 3) {
+            if (expression.includes('*') || expression.includes('/')) {
+                let multiLoc = expression.indexOf('*');
+                let divideLoc = expression.indexOf('/');
+                let location = 0;
+                if (divideLoc == -1) {
+                    location = multiLoc - 1;
+                } else if (multiLoc == -1) {
+                    location = divideLoc - 1;
+                } else if (multiLoc < divideLoc) {
+                    location = multiLoc - 1;
+                } else if (divideLoc < multiLoc) {
+                    location = divideLoc - 1;
+                }
+                const operators = expression.splice(location, 3);
+                expression.splice(location, 0, operation(operators[0],operators[2],operators[1]))
+            } else {
+                const a = expression.shift();
+                const operator = expression.shift();
+                const b = expression.shift();
+                expression.unshift(operation(a,b,operator));
+            }
+        }
+        while (expression.length > 1) {
+            expression.pop()
+        }
+        displayElem.value = expression[0];
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+        const operatorList = [
+            '7','8','9','+'
+            ,'4','5','6','-'
+            ,'1','2','3','*'
+            ,'0','.','/'
+        ]
+        const interfaceElem = document.getElementById("interface");
+        interfaceElem.innerHTML = "";
+        operatorList.forEach(obj => {
+            if (obj === "0") {
+                interfaceElem.innerHTML += "<div class='spanTwo' onclick='display(this);'>" + obj + "</div>"
+            } else {
+                interfaceElem.innerHTML += "<div onclick='display(this);'>" + obj + "</div>"
+            }
+        })
+    })
 </script>
 </html>

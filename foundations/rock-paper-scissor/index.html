@@ -4,21 +4,24 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./index.css">
     <title>Rock Paper Scissor</title>
 </head>
 <body>
-    <select>
-        <option value="0" selected>Rock</option>
-        <option value="1">Paper</option>
-        <option value="2">Scirssor</option>
-    </select>
-    <button onclick="playGame()">Play</button>
-    <div id="result"></div>
+    <div>
+        <select>
+            <option value="0" selected>Rock</option>
+            <option value="1">Paper</option>
+            <option value="2">Scirssor</option>
+        </select>
+        <button onclick="playGame()">Play</button>
+        <div id="result"></div>
+    </div>
 </body>
 <script>
     const stance = ["rock", "paper", "scissor"];
     const toCapitalize = (text) => {
-        if (!text) {
+        if (!!text) {
             return text[0].toUpperCase() + text.substring(1);
         }
     }
