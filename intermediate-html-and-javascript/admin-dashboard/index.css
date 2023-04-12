@@ -2,34 +2,172 @@
     margin:0;
     padding:0;
     box-sizing: border-box;
-    border: 1px solid red;
+    /* border: 1px solid red; */
 }
 
-html, body, container {
+html, body, body > div {
     height: 100%;
 }
 
-container {
+img {
+    vertical-align: middle;
+}
+
+button {
+    border-radius: 20px;
+    border: none;
+    background-color: rgb(135, 153, 235);
+    padding: 5px 20px;
+    color: white;
+    margin: 0 10px;
+}
+
+body > div {
     display: grid;
     grid-template-columns: 300px calc(100% - 300px);
-    grid-template-rows: 200px calc(100% - 200px);
+    grid-template-rows: 1fr;
 }
 
-container > * {
+body > div > sidebar {
     padding: 10px 10px 10px 10px;
-}
-
-container > sidebar {
     background-color: rgb(76, 76, 241);
     color: white;
     grid-row: 1 / span 2;
 }
 
-container > header {
+body > div > sidebar>div {
+    margin: 0 0 20px;
+}
+
+body > div > sidebar>div>a {
+    display: block;
+    width: 100%;
+    height:100%;
+    text-decoration: none;
+    color: inherit; 
+    padding: 10px;
+}
+
+body > div > div {
+    display :flex;
+    flex-direction: column;
+}
+
+header {
+    padding: 0 10px 0;
     box-shadow: 2px 5px 5px 0px rgba(0, 0, 0, 0.50);
     z-index: 10;
 }
 
-container > section {
+div.header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 10px 0;
+}
+
+div.header>div {
+    display:flex;
+    align-items: center;
+}
+
+div.header>div>div {
+    margin: 0 10px;
+}
+
+div.profile {
+    display:flex;
+    flex-direction: row;
+}
+
+input#search {
+    padding: 5px 10px;
+    border-radius: 25px;
     background-color: lightgray;
 }
+
+section {
+    padding: 0 10px 0;
+    background-color: lightgray;
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+}
+
+section>div {
+    padding: 20px 0 0;
+}
+
+div.section-header {
+    padding: 10px 0;
+}
+
+section>div#project {
+    width:100%;
+}
+
+section>div#side {
+    width: 300px;
+    display:flex;
+    flex-direction: column;
+}
+
+section>div#side>div {
+    height: 50%;
+}
+
+div#project-frame {
+    display:grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px 10px;
+    padding: 0 10px 0 0 ;
+}
+
+div#project-frame>div {
+    height: 100px;
+    padding: 10px;
+    background-color: white;
+    border-radius: 10px;
+    border-left: 10px solid yellow
+}
+
+div#announcements>div {
+    padding: 10px 0;
+    border-bottom: 1px solid gray
+}
+
+div.subsection {
+    background-color: white;
+    border-radius: 5px;
+    padding: 20px;
+    height: 70%;
+}
+
+img.sm-icon {
+    width: 25px;
+}
+
+img.icon {
+    width: 50px;
+}
+
+.crop {
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    overflow: hidden;
+}
+
+.crop img {
+    width: unset;
+    height: 150px;
+    margin: -55px 0 0 -17px; 
+}
+
+/* img.profile {
+    border-radius: 50%;
+    object-fit: cover;
+} */
