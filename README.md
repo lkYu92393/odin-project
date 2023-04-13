@@ -7,12 +7,21 @@ Odin Project is a starter project for people to learn web development. It is a c
 This stack contains numerous project from odin project. Instead of hosting one project per repo, I decided to keep the beginner ones in one repo for better organization.
 
 For reference, this stack has the following project:
+
 Foundations/recipes
+
 Foundations/Landing Page
+
 Foundations/Rock Paper Scissor
+
 Foundations/Etch-a-sketch
+
 Foundations/calculator
+
 Intermediate/Sign-up-form
+
 Intermediate/admin-dashboard
+
 Javascript/Library
+
 Javascript/Tic-tac-toe
