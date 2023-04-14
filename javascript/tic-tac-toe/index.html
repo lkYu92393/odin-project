@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./index.css">
+    <title>Tic Tac Toe</title>
+</head>
+<body>
+    <div id="choice" class="overlay">
+        <div>
+            <div>First move?</div>
+            <div>
+                <input type="radio" name="choice" id="yes" /><label for="yes">Yes</label>
+            </div>
+            <div>
+                <input type="radio" name="choice" id="no" /><label for="no">No</label>
+            </div>
+            <div>
+                <button onclick="start();">Confirm</button>
+            </div>
+        </div>
+    </div>
+    <div id="game">
+        <div class="">
+
+        </div>
+    </div>
+</body>
+<script>
+    const overlay = document.getElementById("choice");
+
+    let game = null;
+    const start = () => {
+        // let choice = Array.prototype.slice.call(document.getElementsByName("choice")).filter(elem => elem.checked);
+        let choice = Array.from(document.getElementsByName("choice")).filter(elem => elem.checked);
+        if (choice.length == 0) {
+            alert("Please make a choice before proceeding");
+            return;
+        } else {
+            choice = choice[0].id.toLowerCase();
+            overlay.classList.add("hidden");
+            if (choice == "yes") {
+                return;
+            } else {
+                return;
+            }
+        }
+    }
+</script>
+</html>
