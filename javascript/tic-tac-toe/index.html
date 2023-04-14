@@ -8,7 +8,7 @@
     <title>Tic Tac Toe</title>
 </head>
 <body>
-    <div id="choice" class="overlay">
+    <div id="choice" class="hidden overlay">
         <div>
             <div>First move?</div>
             <div>
@@ -29,24 +29,26 @@
     </div>
 </body>
 <script>
-    const overlay = document.getElementById("choice");
-
     let game = null;
-    const start = () => {
-        // let choice = Array.prototype.slice.call(document.getElementsByName("choice")).filter(elem => elem.checked);
-        let choice = Array.from(document.getElementsByName("choice")).filter(elem => elem.checked);
-        if (choice.length == 0) {
-            alert("Please make a choice before proceeding");
-            return;
-        } else {
-            choice = choice[0].id.toLowerCase();
-            overlay.classList.add("hidden");
-            if (choice == "yes") {
-                return;
-            } else {
-                return;
-            }
-        }
-    }
+
+    // const overlay = document.getElementById("choice");
+    // const start = () => {
+    //     // let choice = Array.prototype.slice.call(document.getElementsByName("choice")).filter(elem => elem.checked);
+    //     let choice = Array.from(document.getElementsByName("choice")).filter(elem => elem.checked);
+    //     if (choice.length == 0) {
+    //         alert("Please make a choice before proceeding");
+    //         return;
+    //     } else {
+    //         choice = choice[0].id.toLowerCase();
+    //         overlay.classList.add("hidden");
+    //         if (choice == "yes") {
+    //             return;
+    //         } else {
+    //             return;
+    //         }
+    //     }
+    // }
+
+    
 </script>
 </html>

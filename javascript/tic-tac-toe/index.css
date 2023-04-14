@@ -40,7 +40,7 @@ body>div#choice>div>div:nth-child(3n+1) {
 body>div#game {
     background-color: white;
     border-radius: 10px;
-    width: max(50vh, 800px);
+    width: 440px;
     margin: 30px auto;
     padding: 20px
 }
