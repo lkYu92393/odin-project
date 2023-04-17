@@ -47,6 +47,7 @@
     }
 
     const gameModule = (() => {
+        let started = false;
         let choice = 0;
         let computerChoice = 0;
 
@@ -92,15 +93,44 @@
         }
 
         const checkCondition = () => {
-            let gameSettled = false;
-            [0,1,2].forEach(i => {
-                [0,1,2].reduce(j => {
-                    
-                }, gameSettled)
-            })
+            if (gameStatus.filter(grid => grid.status == 0).length <= 3) {
+                let gameSettled = false;
+                [0,1,2].forEach((i) => {
+                    gameSettled = gameSettled
+                    || (
+                        gameStatus.find(grid => grid.x == i && grid.y == 0).status == gameStatus.find(grid => grid.x == i && grid.y == 1).status
+                        && gameStatus.find(grid => grid.x == i && grid.y == 2).status == gameStatus.find(grid => grid.x == i && grid.y == 1).status
+                        )
+                });
+                [0,1,2].forEach((i) => {
+                    gameSettled = gameSettled
+                    || (
+                        gameStatus.find(grid => grid.x == 0 && grid.y == i).status == gameStatus.find(grid => grid.x == 1 && grid.y == i).status
+                        && gameStatus.find(grid => grid.x == 1 && grid.y == i).status == gameStatus.find(grid => grid.x == 2 && grid.y == i).status
+                        )
+                });
+
+                gameSettled = gameSettled
+                        || (
+                            gameStatus.find(grid => grid.x == 0 && grid.y == 0).status == gameStatus.find(grid => grid.x == 1 && grid.y == 1).status
+                            && gameStatus.find(grid => grid.x == 1 && grid.y == 1).status == gameStatus.find(grid => grid.x == 2 && grid.y == 2).status
+                        )  || (
+                            gameStatus.find(grid => grid.x == 0 && grid.y == 2).status == gameStatus.find(grid => grid.x == 1 && grid.y == 1).status
+                            && gameStatus.find(grid => grid.x == 1 && grid.y == 1).status == gameStatus.find(grid => grid.x == 0 && grid.y == 2).status
+                        )
+
+                if (gameSettled) {
+                    started = false;
+                    console.log("Game ended.");
+                }
+            }
         }
 
         const changeStatus = (i, j) => {
+            if (!started) {
+                console.log("GAME ENDED ALREADY.")
+                return;
+            }
             const elem = gameStatus.filter(grid => grid.x == i && grid.y == j);
             if (elem.length > 0) {
                 if (elem[0].status != 0) {
@@ -110,12 +140,14 @@
                 gameStatus.find(grid => grid.x == i && grid.y == j).status = choice;
                 computerMove();
                 drawGame();
+                checkCondition();
             } else {
                 console.log("Can't find the grid. " + `x: ${i}, y: ${j}`);
             }
         }
 
         const startGame = (playerChoice) => {
+            started = true;
             choice = playerChoice;
             computerChoice = choice == 1 ? 2 : (choice == 2 ? 1 : 2)
             if (choice == 2) {
