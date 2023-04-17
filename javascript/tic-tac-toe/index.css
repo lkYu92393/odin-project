@@ -38,9 +38,42 @@ body>div#choice>div>div:nth-child(3n+1) {
 }
 
 body>div#game {
+}
+
+body>div#game>div {
     background-color: white;
     border-radius: 10px;
-    width: 440px;
+    width: 490px;
     margin: 30px auto;
-    padding: 20px
+    padding: 20px;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+}
+
+body>div#game>div>div {
+    width: 150px;
+    height: 150px;
+    line-height: 150px;
+    font-size: 150px;
+    text-align: center;
+}
+
+body>div#game>div>div:nth-child(9n + 1)
+,body>div#game>div>div:nth-child(9n + 2)
+,body>div#game>div>div:nth-child(9n + 4)
+,body>div#game>div>div:nth-child(9n + 5)
+,body>div#game>div>div:nth-child(9n + 7)
+,body>div#game>div>div:nth-child(9n + 8) {
+    border-right: 1px solid black;
+}
+
+body>div#game>div>div:nth-child(9n + 1)
+,body>div#game>div>div:nth-child(9n + 2)
+,body>div#game>div>div:nth-child(9n + 3)
+,body>div#game>div>div:nth-child(9n + 4)
+,body>div#game>div>div:nth-child(9n + 5)
+,body>div#game>div>div:nth-child(9n + 6) {
+    border-bottom: 1px solid black;
 }

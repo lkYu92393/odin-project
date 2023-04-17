@@ -8,7 +8,7 @@
     <title>Tic Tac Toe</title>
 </head>
 <body>
-    <div id="choice" class="hidden overlay">
+    <div id="choice" class="overlay">
         <div>
             <div>First move?</div>
             <div>
@@ -23,40 +23,102 @@
         </div>
     </div>
     <div id="game">
-        <div class="">
-
-        </div>
     </div>
 </body>
 <script>
     let game = null;
+    const overlay = document.getElementById("choice");
 
-    // const overlay = document.getElementById("choice");
-    // const start = () => {
-    //     // let choice = Array.prototype.slice.call(document.getElementsByName("choice")).filter(elem => elem.checked);
-    //     let choice = Array.from(document.getElementsByName("choice")).filter(elem => elem.checked);
-    //     if (choice.length == 0) {
-    //         alert("Please make a choice before proceeding");
-    //         return;
-    //     } else {
-    //         choice = choice[0].id.toLowerCase();
-    //         overlay.classList.add("hidden");
-    //         if (choice == "yes") {
-    //             return;
-    //         } else {
-    //             return;
-    //         }
-    //     }
-    // }
-
-    const gameModule = () => {
-        let choice = null;
-        const drawGame = () => {
-            
-        }
-        const startGame = (choice) => {
-
+    const start = () => {
+        // let choice = Array.prototype.slice.call(document.getElementsByName("choice")).filter(elem => elem.checked);
+        let choice = Array.from(document.getElementsByName("choice")).filter(elem => elem.checked);
+        if (choice.length == 0) {
+            alert("Please make a choice before proceeding");
+            return;
+        } else {
+            choice = choice[0].id.toLowerCase();
+            overlay.classList.add("hidden");
+            if (choice == "yes") {
+                return gameModule.startGame(1);
+            } else {
+                return gameModule.startGame(2);
+            }
         }
     }
+
+    const gameModule = (() => {
+        let choice = 0;
+        let computerChoice = 0;
+
+        const gameDiv = document.getElementById("game");
+
+        const gridFactory = (x, y, status) => {
+            return {x, y, status};
+        }
+
+        // generate an array of i,j in 0,1,2 with status:0 meaning empty grid
+        const gameStatus = [0,1,2].reduce((a,b) => {
+            return a.concat([0,1,2].reduce((c,d) => {
+                return c.concat(gridFactory(b, d, 0));
+            }, []))
+        }, []);
+
+        const drawGame = () => {
+            gameDiv.innerHTML = "<div>" + gameStatus.map(grid => {
+                return `<div onclick='gameModule.changeStatus(${grid.x}, ${grid.y})'>` + (grid.status != 0
+                     ? (grid.status == 1 ? "O" : "X")
+                     : "") + "</div>";
+            }).join("") + "</div>";
+        }
+        
+        const computerMove = (firstMove = false) => {
+            if (firstMove) {
+                gameStatus.find(grid => grid.x == 1 && grid.y == 1).status = computerChoice
+                return;
+            }
+            if (gameStatus.filter(grid => grid.status == 0).length == 0) {
+                return;
+            }
+            let collision = true;
+            while (collision) {
+                const x = Math.floor(Math.random() * 3);
+                const y = Math.floor(Math.random() * 3);
+                const elem = gameStatus.find(grid => grid.x == x && grid.y == y);
+                if (elem.status == 0) {
+                    collision = false;
+                    elem.status = computerChoice;
+                }
+            }
+        }
+
+        const checkCondition = () => {
+
+        }
+
+        const changeStatus = (i, j) => {
+            const elem = gameStatus.filter(grid => grid.x == i && grid.y == j);
+            if (elem.length > 0) {
+                if (elem[0].status != 0) {
+                    console.log("Already filled.");
+                    return;
+                }
+                gameStatus.find(grid => grid.x == i && grid.y == j).status = choice;
+                computerMove();
+                drawGame();
+            } else {
+                console.log("Can't find the grid. " + `x: ${i}, y: ${j}`);
+            }
+        }
+
+        const startGame = (playerChoice) => {
+            choice = playerChoice;
+            computerChoice = choice == 1 ? 2 : (choice == 2 ? 1 : 2)
+            if (choice == 2) {
+                computerMove(true);
+            }
+            drawGame();
+        }
+        return { changeStatus, startGame };
+    })();
 </script>
 </html>
