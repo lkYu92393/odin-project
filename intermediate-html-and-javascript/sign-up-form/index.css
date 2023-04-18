@@ -111,3 +111,7 @@ button#create-account {
     background-color: #596D48;
     margin: 0 0 20px 0;
 }
+
+input:invalid {
+    border: 2px solid red;
+}
