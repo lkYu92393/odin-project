@@ -1,0 +1,39 @@
+div.main {
+    width: 840px;
+    padding: 20px;
+    margin: auto;
+}
+
+div#shadow {
+    box-shadow: 10px 5px 5px black;
+}
+
+div#print {
+    border-radius: 5px;
+    background-color: #fff;
+    color: #000;
+    padding: 10px;
+}
+
+div.grid {
+    margin: 10px 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5px 5px;
+}
+
+div.grid>*.row {
+    grid-column: span 2;
+}
+
+textarea {
+    resize: vertical;
+}
+
+div.action {
+    padding: 20px 0;
+}
+
+div.action>button {
+    margin: 0 10px 0 0;
+}
